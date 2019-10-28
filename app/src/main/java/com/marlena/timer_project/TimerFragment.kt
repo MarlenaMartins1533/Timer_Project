@@ -1,4 +1,4 @@
-package com.marlena.cubos_timer
+package com.marlena.timer_project
 
 import android.content.Context
 import android.net.Uri

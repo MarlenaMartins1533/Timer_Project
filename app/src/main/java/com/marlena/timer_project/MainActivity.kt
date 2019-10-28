@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(Toolbar(this))
+        setSupportActionBar(toolbar)
 
         tablayout.setupWithViewPager(viewPager)
         viewPager.adapter = MainPagerAdapter(supportFragmentManager)
