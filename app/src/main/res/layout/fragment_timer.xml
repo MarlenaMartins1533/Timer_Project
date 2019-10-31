@@ -1,38 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlack"
-    tools:context=".StopWatchFragment">
+    android:background="@color/colorBlack">
 
-    <LinearLayout
+    <Chronometer
+        android:id="@+id/chronometer_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical">
+        android:padding="8dp"
+        android:textColor="@color/colorWhite"
+        android:textSize="64sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.40" />
 
-        <TextView
-            android:id="@+id/counterTXT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_gravity="center"
-
-            android:text="@string/counter"
-            android:textColor="@color/colorWhite"
-            android:textSize="120sp" />
-
-        <Button
-            android:id="@+id/startBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:background="@drawable/shape_button"
-
-            android:text="@string/start"
-            android:textColor="@color/colorWhite"
-            android:textSize="24sp"/>
-    </LinearLayout>
-
-</FrameLayout>
+    <Button
+        android:id="@+id/b_timer_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:background="@drawable/shape_button"
+        android:text="@string/start"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chronometer_timer"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

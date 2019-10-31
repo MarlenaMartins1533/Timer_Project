@@ -1,39 +1,67 @@
 package com.marlena.timer_project
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
+import android.os.SystemClock
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.marlena.timer_project.Constants
-import com.marlena.timer_project.R
+import kotlinx.android.synthetic.main.fragment_timer.*
 
 class TimerFragment : Fragment() {
 
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
+    private var param: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        param = arguments?.getString(TYPE_PARAM)
         return inflater.inflate(R.layout.fragment_timer, container, false)
     }
 
-    interface OnFragmentInteractionListener {
-        fun onFragmentInteraction(uri: Uri)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initListener()
+    }
+
+    private var isRunning = false
+    private fun initListener(){
+
+        chronometer_timer.base = SystemClock.elapsedRealtime()
+
+        b_timer_start.setOnClickListener {
+            when (isRunning) {
+                false -> {
+                    chronometer_timer.base = SystemClock.elapsedRealtime()
+                    chronometer_timer.start()
+                    if (param == STOP_WATCH_PARAM) b_timer_start.setText(R.string.stop)
+                    isRunning = true
+                }
+                true -> {
+                    if (param == TIMER_PARAM) {
+                        chronometer_timer.base = SystemClock.elapsedRealtime()
+                        chronometer_timer.start()
+                    } else if (param == STOP_WATCH_PARAM){
+                        chronometer_timer.stop()
+                        b_timer_start.setText(R.string.start)
+                        isRunning = false
+                    }
+                }
+            }
+        }
     }
 
     companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        const val TIMER_PARAM = "timer_param"
+        const val STOP_WATCH_PARAM = "stop_watch_param"
+
+        private const val TYPE_PARAM = "type_param"
+
+        fun newInstance(param: String) =
             TimerFragment().apply {
                 arguments = Bundle().apply {
-                    putString(Constants.ARG_PARAM1, param1)
-                    putString(Constants.ARG_PARAM2, param2)
+                    putString(TYPE_PARAM, param)
                 }
             }
     }
